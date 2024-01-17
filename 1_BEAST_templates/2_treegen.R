@@ -42,6 +42,8 @@ make_starting_trees = function(tree , treeoutfn = 'startTrees.nwk', ncpu = 1, nt
 
 # All Sequences -----------------------------------------------------------
 seqs <- read.FASTA(paste0("./longlabs_seq_AFGPAK_",latestdate,".fasta"))
+write.FASTA(seqs, paste0("./",latestdate,"/longlabs_seq_",latestdate,".fasta"))
+
 
 # Save starting trees
 if(file.exists(paste0("./all_",latestdate))){cat("folder exists")} else {dir.create(paste0("./all_",latestdate))}
