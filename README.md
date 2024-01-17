@@ -14,12 +14,15 @@ In this analysis tree generation and inference of movement events are split into
 ## [2_BF_supported_movements](./2_BF_supported_movements)
 Following analysis with BEAST, Bayes Factor (BF) support for the returned numbers of transitions between regions is assessed with [spreaD3 (v.0.9.7)](https://rega.kuleuven.be/cev/ecv/software/SpreaD3). Only transitions with BF support above 10 are included in plots of the numbers of movements between regions shown in the manuscript (Fig. 1 E&F).
 
-The numbers of transitions and bounds on these numbers are matched manually from the output of the MJ-DTA visualised in Tracer 1.7.2 to the BF supported transitions returned from spreaD3. The matched data are provided in 'XXXX.csv'
+The numbers of transitions and bounds on these numbers are matched manually from the output of the MJ-DTA visualised in Tracer 1.7.2 to the BF supported transitions returned from spreaD3. The matched data are provided in 'supported_out.csv'. Total numbers of movements into and  out of each region are estimated separately in the MJ-DTA analysis. These estimates and their bounds are given in`movement_bounds.csv`. Code to produce circos and bar plots from these data is provided in `movement_plots.R`.
 
 ## [3_Local_Transmsision_Lineages](./3_Local_Transmsision_Lineages)
 A [consensus phylogeny](./3_Local_Transmsision_Lineages/) is generated from the MJ-DTA analysis using the treeannotator software bundled with BEAST and the burn-in as specified in the manuscript. Local Transmission Lineages (LTLs) are then produced in R by splitting the phylogeny wherever a change in state (location) is inferred on the tree. This can be used to produce figures showing all of the LTLs or further summarised. Code to carry out the tree splitting, plotting and summary plotting are provided. 
 
-## [4_Orphan_Lineages](./4_Orphan_Lineages)
+## [4_Reproduction_Number](./4_Reproduction_Number)
+
+
+## [5_Orphan_Lineages](./5_Orphan_Lineages)
 Orphan lineages are defined in the Global Polio Eradication Initiative (GPEI) based on the pairwise genetic distance between sequences rather than on phylogenetic relationships. The R code used to generate these distances and produce the plots in the manuscript is provided. This code extracts the location of genetic sequences from the dataframe produced for the eariler analyses, although these could be extracted directly from the initial metadata without running the preceeding steps with modifications to the code provided.
 
 ## Other supplementary information
