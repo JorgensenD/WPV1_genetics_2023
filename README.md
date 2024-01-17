@@ -16,4 +16,12 @@ The numbers of transitions and bounds on these numbers are matched manually from
 A [consensus phylogeny](./3_Local_Transmsision_Lineages/) is generated from the MJ-DTA analysis using the treeannotator software bundled with BEAST and the burn-in as specified in the manuscript. Local Transmission Lineages (LTLs) are then produced in R by splitting the phylogeny wherever a change in state (location) is inferred on the tree. This can be used to produce figures showing all of the LTLs or further summarised. Code to carry out the tree splitting, plotting and summary plotting are provided. 
 
 ## [4_Orphan_Lineages](./4_Orphan_Lineages)
-Orphan lineages are defined in the Global Polio Eradication Initiative (GPEI) based on the pairwise genetic distance between sequences rather than on phylogenetic relationships. The R code used to generate these distances and produce the plots in the manuscript is provided. This code extracts the location of genetic sequences from the dataframe produced for the eariler analyses, although these could be extracted directly from the initial metadata without running the preceeding steps with modifications to the code provided. 
+Orphan lineages are defined in the Global Polio Eradication Initiative (GPEI) based on the pairwise genetic distance between sequences rather than on phylogenetic relationships. The R code used to generate these distances and produce the plots in the manuscript is provided. This code extracts the location of genetic sequences from the dataframe produced for the eariler analyses, although these could be extracted directly from the initial metadata without running the preceeding steps with modifications to the code provided.
+
+## Other supplementary information
+Background WPV1 sequecnes were extracted from GenBank. These are not reproduced here as they are publicly available on that platform. Accession numbers for the included sequences are provided here.
+Non-polio AFP rates and numbers of environmental surveillance sites provided in the supplementary material are extracted from the World Health Organization Polio Information System. [A public version of this database is available](https://extranet.who.int/polis/public/CaseCount.aspx). More complex data is available on request from the WHO. 
+As these figures cannot be recreated without the required data access the code is not reporduced here. Code can be provided on request.
+
+
+
