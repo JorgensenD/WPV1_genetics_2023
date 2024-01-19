@@ -1,6 +1,6 @@
 # Code for the paper "Genetic epidemiology of wild type 1 poliovirus in the last endemic region"
 
-This repository provides the code used to analyse and plot the date presented in the above paper. This code covers both bayesian phylogeographic analysis in BEAST and the downstream analysis and plotting of the outputs of this work in R.
+This repository provides the code used to analyse and plot the date presented in the above paper. This code covers both bayesian phylogeographic analysis in BEAST and the downstream analysis and plotting of the outputs of this work in R. 
 
 A brief description of the functionality of each of the included scripts is provided below.
 
@@ -20,10 +20,10 @@ The numbers of transitions and bounds on these numbers are matched manually from
 A [consensus phylogeny](./MJ_MCC_CA_DS.trees/) is generated from the MJ-DTA analysis using the treeannotator software bundled with BEAST and the burn-in as specified in the manuscript. Local Transmission Lineages (LTLs) are then produced in R by splitting the phylogeny wherever a change in state (location) is inferred on the tree. This can be used to produce figures showing all of the LTLs or can be further summarised. Code to carry out the tree splitting, plotting and summary plotting are provided. 
 
 ## [4_Reproduction_Number](./4_Reproduction_Number)
-In this analysis we use the mlesky method of Volz et al. and the consensus phylogeny produced from the MJ-DTA analysis to estimate an effective reproduction number over time. The consensus phylogeny is provided in the file `MJ_MCC_CA_DS.trees`.
+In this analysis we use the [mlesky method of Volz et al.](https://github.com/emvolz-phylodynamics/mlesky) and the consensus phylogeny produced from the MJ-DTA analysis to estimate an effective reproduction number over time. The consensus phylogeny is provided in the file `MJ_MCC_CA_DS.trees`.
 
 ## [5_Orphan_Lineages](./5_Orphan_Lineages)
-Orphan lineages are defined in the Global Polio Eradication Initiative (GPEI) based on the pairwise genetic distance between sequences rather than on phylogenetic relationships. The R code used to generate these distances and produce the plots in the manuscript is provided. This code extracts the location of genetic sequences from the dataframe produced for the eariler analyses, although these could be extracted directly from the initial metadata without running the preceeding steps with modifications to the code provided.
+Orphan lineages are defined in the Global Polio Eradication Initiative (GPEI) based on the pairwise genetic distance between sequences rather than on phylogenetic relationships. The R code used to generate these distances and produce the plots in the manuscript is provided. This code extracts the location of genetic sequences from the dataframe produced for the eariler analyses, although these could be extracted directly from the initial metadata without running the preceeding steps by modifying the included code.
 
 ## Other supplementary information
 Background WPV1 sequecnes were extracted from GenBank. These are not reproduced here as they are publicly available on that platform. Accession numbers for the included sequences are provided here.
