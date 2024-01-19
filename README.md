@@ -28,7 +28,7 @@ Orphan lineages are defined in the Global Polio Eradication Initiative (GPEI) ba
 ## Other supplementary information
 Background WPV1 sequecnes were extracted from GenBank. These are not reproduced here as they are publicly available on that platform. Accession numbers for the included sequences are provided here.
 Non-polio AFP rates and numbers of environmental surveillance sites provided in the supplementary material are extracted from the World Health Organization Polio Information System. [A public version of this database is available](https://extranet.who.int/polis/public/CaseCount.aspx). More complex data is available on request from the WHO. 
-As these figures cannot be recreated without the required data access the code is not reporduced here. Code can be provided on request. Code not used in the current analysis to produce animated and static maps of viral movements can also be provided on request.
+As these figures cannot be recreated without the required data access the code is not reporduced here. This can be provided on request. Code not used in the current analysis to produce animated and static maps of viral movements can also be provided on request.
 
 
 
