@@ -169,7 +169,78 @@ plot_grid(plot_grid(plot_outbreak1+ theme(legend.position="none"),
 ggsave("movement_matrix.png", height = 6, width = 10)
 
 
+
+
+# Plot types of LTL over time by region -----------------------------------
+downstreamtree$onwards <- do.call(rbind.data.frame, lapply(downstreamtree$V8, function(x) str_detect(x, "collapse")))
+
+downstreamtree$onwards <- downstreamtree$onwards[,1]
+
+downstreamtree <- downstreamtree %>%
+  mutate(Category = case_when(diff<=730 & V5<5 & onwards == F ~ "dead end",
+                              diff>=365 & V5>10 ~ "persistent",
+                              onwards == T ~ "export",
+                              T ~ "other")) 
+
+downstreamtree %>% group_by(V2) %>% tabyl(Category)
+
+
+table(downstreamtree$V2, downstreamtree$Category)
+
+
+rolling_type_clusters <- function(date_end, downstreamtree, roll_period){
+  order_regi <- levels(as.factor(downstreamtree$V2))
+  day_include <- seq(date_end-roll_period, date_end, by = "days")
+  suppressMessages({
+    matchdata <-  downstreamtree  %>%
+      drop_na() %>%
+      rowwise() %>%
+      mutate(match = ifelse(any(between(day_include, V3, V4)), 1, 0)) %>%
+      filter(match == 1)
+    
+    matchdata <- matchdata %>%
+      group_by(V2, Category) %>%
+      tally() %>% 
+      mutate(freq = prop.table(n)) %>%
+      right_join(expand.grid(V2 = order_regi), by = "V2") %>%
+      mutate(date = date_end)
+  })
+  
+  return(matchdata[order(match(names(matchdata), order_regi))])
+}
+
+rolling_type_clusters(as.Date("2022-03-14"), downstreamtree, roll_period = 1)
+
+
+cluster_types <- lapply(alldays,rolling_type_clusters, downstreamtree=downstreamtree, roll_period = 1)
+
+count_cluster_types <- do.call(rbind, cluster_types)
+
+count_cluster_types$Category <- relevel(as.factor(count_cluster_types$Category), 'other')  
+
+
+
+ggplot() +
+  geom_bar(data = count_cluster_types, aes(x = date, y = n, fill = Category, color = Category), stat = "identity")+
+  scale_y_continuous(expand = c(0,0))+
+  scale_color_manual(values = c("gray80", "orange", "deeppink", "purple4"))+
+  scale_fill_manual(values = c("gray80", "orange", "deeppink", "purple4"))+
+  theme_bw()+
+  scale_x_date(limits = c(earliest_date, ymd(mrsd)), expand = c(0,0))+
+  labs(x = "Date",
+       y = "Number of lineages") +
+  facet_wrap(~V2, ncol = 4) +
+  theme(legend.direction = "horizontal", legend.position = "bottom", panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  guides(fill = guide_legend(title.position = "top", title.hjust = 0.5), color = guide_legend(title.position = "top", title.hjust = 0.5)) 
+
+
+ggsave("chain_types_wide.png", width = 8, height = 5.5, dpi = 700)
+ggsave("chain_types_wide.svg", width = 8, height = 5.5)
+
+
 save(downstreamtree, file = "downstreamtree_all.rdata")
+
+
 
 
 
