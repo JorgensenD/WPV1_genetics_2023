@@ -22,7 +22,7 @@ library(ggtree)
 
 
 ## functions
-source(LTL_functions.R)
+source("LTL_functions.R")
 
 # Tree input --------------------------------------------------------------
 
