@@ -438,4 +438,31 @@ locatefunc <- function(x){
   else(return(NA))}
 
 
+#'@title Find all identical sequences and return names
+#'@param sequences aligned sequences in DNAbin format
+#'@return names of identical sequences as a vector (returns both names in a pair of identical sequences)
+#'@export
+find_all_identical_sequence_names <- function(sequences) {
+  sequence_table <- new.env(hash = TRUE)
+  identical_sequence_names <- list()
+  
+  for (i in seq_along(sequences)) {
+    seq_string <- paste(sequences[[i]], collapse = "")
+    seq_hash <- digest::digest(seq_string)
+    
+    if (exists(seq_hash, sequence_table)) {
+      # Add the name of the sequence to the existing list
+      identical_sequence_names[[seq_hash]] <- c(identical_sequence_names[[seq_hash]], names(sequences)[i])
+    } else {
+      # Create a new entry in the list with the name of this sequence
+      identical_sequence_names[[seq_hash]] <- names(sequences)[i]
+      assign(seq_hash, TRUE, envir = sequence_table)
+    }
+  }
+  
+  # Filter out the entries that have only one sequence (i.e., no duplicates)
+  identical_sequence_names <- identical_sequence_names[sapply(identical_sequence_names, function(x) length(x) > 1)]
+  identical_sequence_names <- unlist(identical_sequence_names)
+  return(unname(identical_sequence_names))
+}
 
