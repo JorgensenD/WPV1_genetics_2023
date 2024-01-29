@@ -26,7 +26,6 @@ In this analysis we use the [mlesky method of Volz et al.](https://github.com/em
 Orphan lineages are defined in the Global Polio Eradication Initiative (GPEI) based on the pairwise genetic distance between sequences rather than on phylogenetic relationships. The R code used to generate these distances and produce the plots in the manuscript is provided. This code extracts the location of genetic sequences from the dataframe produced for the eariler analyses, although these could be extracted directly from the initial metadata without running the preceeding steps by modifying the included code.
 
 ## Other supplementary information
-Background WPV1 sequecnes were extracted from GenBank. These are not reproduced here as they are publicly available on that platform. Accession numbers for the included sequences are provided here.
 Non-polio AFP rates and numbers of environmental surveillance sites provided in the supplementary material are extracted from the World Health Organization Polio Information System. [A public version of this database is available](https://extranet.who.int/polis/public/CaseCount.aspx). More complex data is available on request from the WHO. 
 As these figures cannot be recreated without the required data access the code is not reporduced here. This can be provided on request. Code not used in the current analysis to produce animated and static maps of viral movements can also be provided on request.
 
