@@ -17,17 +17,25 @@ Following analysis with BEAST, Bayes Factor (BF) support for the returned number
 The numbers of transitions and bounds on these numbers are matched manually from the output of the MJ-DTA visualised in Tracer 1.7.2 to the BF supported transitions returned from spreaD3. The matched data are provided in 'supported_out.csv'. Total numbers of movements into and  out of each region are estimated separately in the MJ-DTA analysis. These estimates and their bounds are given in`movement_bounds.csv`. Code to produce circos and bar plots from these data is provided in `movement_plots.R`.
 
 ## [3_Local_Transmsision_Lineages](./3_Local_Transmsision_Lineages)
-A [consensus phylogeny](./MJ_MCC_CA_DS.trees/) is generated from the MJ-DTA analysis using the treeannotator software bundled with BEAST and the burn-in as specified in the manuscript. Local Transmission Lineages (LTLs) are then produced in R by splitting the phylogeny wherever a change in state (location) is inferred on the tree. This can be used to produce figures showing all of the LTLs or can be further summarised. Code to carry out the tree splitting, plotting and summary plotting are provided. 
+A [consensus phylogeny](./MJ_MCC_CA_DS.trees/) is generated from the MJ-DTA analysis using the treeannotator software bundled with BEAST and the burn-in as specified in the manuscript. Local Transmission Lineages (LTLs) are then produced in R by splitting the phylogeny wherever a change in state (location) is inferred on the tree. This can be used to produce figures showing all of the LTLs or can be further summarised. Code to carry out the tree splitting, plotting and summary plotting are provided. The code in `bezier_map_anim.R` can be used to animate the LTLs over time on a map.
 
-## [4_Reproduction_Number](./4_Reproduction_Number)
-In this analysis we use the [mlesky method of Volz et al.](https://github.com/emvolz-phylodynamics/mlesky) and the consensus phylogeny produced from the MJ-DTA analysis to estimate an effective reproduction number over time. The consensus phylogeny is provided in the file `MJ_MCC_CA_DS.trees`.
+## Tipswap analysis 
+The tipswap analysis is carried out using the template provided: [MJ_TIPSWAP_TEMPLATE.xml](./1_BEAST_templates/MJ_TIPSWAP_TEMPLATE.xml). This is the same as the template for a standard markov jump analysis with an additional tipswap operator. To ensure at least 95% of the tips are swapped at each iteration the weight of the tipswap operator is calculated as follows:
 
-## [5_Orphan_Lineages](./5_Orphan_Lineages)
-Orphan lineages are defined in the Global Polio Eradication Initiative (GPEI) based on the pairwise genetic distance between sequences rather than on phylogenetic relationships. The R code used to generate these distances and produce the plots in the manuscript is provided. This code extracts the location of genetic sequences from the dataframe produced for the eariler analyses, although these could be extracted directly from the initial metadata without running the preceeding steps by modifying the included code.
+Where threshold = 0.95, we calculate X based on the number of tips used in the analysis
+`x = log(1-threshold)/log((nb.tips-2)/nb.tips))`
+We can then use this to calculate the total number of randomisations using the number of samples to be collected during the run (logevery/chain length)
+`nb.randomistations = x*nb.samples`
+The operator weight is then calculated with this number of randomisations. Total operators is the sum of the weight of all other operators.
+`weight = nb.randomisations/MCMC.length*total.operators`
+
+The posterior probabilities for the tipswap analysis are calculated as outlined in section 2 and can be used to correct the Bayes Factors estimated in the main analysis:
+`BF = [PP_dta/(1-PP_dta)] / [PP_tsw/(1-PP_tsw)]`
+Where either PP is equal to 1 it is approximated with `pp = (nb.samples - 1) / nb.samples` and where both are equal to 1 the BF is set to 1.
 
 ## Other supplementary information
 Non-polio AFP rates and numbers of environmental surveillance sites provided in the supplementary material are extracted from the World Health Organization Polio Information System. [A public version of this database is available](https://extranet.who.int/polis/public/CaseCount.aspx). More complex data is available on request from the WHO. 
-As these figures cannot be recreated without the required data access the code is not reporduced here. This can be provided on request. Code not used in the current analysis to produce animated and static maps of viral movements can also be provided on request.
+As these figures cannot be recreated without the required data access the code is not reporduced here. This can be provided on request. Code used to produce animated and static maps of viral movements can also be provided on request.
 
 
 
