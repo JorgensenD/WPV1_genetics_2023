@@ -23,14 +23,21 @@ A [consensus phylogeny](./MJ_MCC_CA_DS.trees/) is generated from the MJ-DTA anal
 The tipswap analysis is carried out using the template provided: [MJ_TIPSWAP_TEMPLATE.xml](./1_BEAST_templates/MJ_TIPSWAP_TEMPLATE.xml). This is the same as the template for a standard markov jump analysis with an additional tipswap operator. To ensure at least 95% of the tips are swapped at each iteration the weight of the tipswap operator is calculated as follows:
 
 Where threshold = 0.95, we calculate X based on the number of tips used in the analysis
+
 `x = log(1-threshold)/log((nb.tips-2)/nb.tips))`
+
 We can then use this to calculate the total number of randomisations using the number of samples to be collected during the run (logevery/chain length)
+
 `nb.randomistations = x*nb.samples`
+
 The operator weight is then calculated with this number of randomisations. Total operators is the sum of the weight of all other operators.
+
 `weight = nb.randomisations/MCMC.length*total.operators`
 
 The posterior probabilities for the tipswap analysis are calculated as outlined in section 2 and can be used to correct the Bayes Factors estimated in the main analysis:
+
 `BF = [PP_dta/(1-PP_dta)] / [PP_tsw/(1-PP_tsw)]`
+
 Where either PP is equal to 1 it is approximated with `pp = (nb.samples - 1) / nb.samples` and where both are equal to 1 the BF is set to 1.
 
 ## Other supplementary information
