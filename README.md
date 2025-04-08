@@ -4,6 +4,9 @@ This repository provides the code used to analyse and plot the date presented in
 
 A brief description of the functionality of each of the included scripts is provided below.
 
+The code has been tested on R version 4.4.1, BEAST version 1.10.4 and 1.10.5 and SpreaD3 version 0.9.7. Package versions for R are included in the respective code files, BEAST does not have any additional dependencies. The code is independent of operating system but is tested primarily on MAC OS 15. The Included scripts in [Figures](./Figures) and minimal working data in [Plot_data](./Plot_data) can be used to recreate the figures in the main text of the paper. This is possible by cloning this repository locally or by manually downloading the relevant files. Plotting from these data should be almost instantaneuos on a standard desktop computer. To run the full analysis takes around 5 days from start to finish, with each iteration of the tree generating process (8 used here) and the split tree plotting (here we use a subset of 300 posterior phylogenies) split across multiple CPU cores. Here we use 8 cores each with 4gb of memory for the tree generation process and 12 cores with a pooled 16gb of ram for the tree plotting. Both of these can be carried out with more restricted computational resources but the analysis will take significantly longer to run.
+
+
 ## [1_BEAST_templates](./1_BEAST_templates)
 **Sequence data must be provided with names in the format "SEQUENCENAME_SAMPLETYPE_ADMIN0NAME_SAMPLEDECIMALDATE_CLUSTER_REGION".** A map of the regions used in this analysis is shown in Fig.1.
 
