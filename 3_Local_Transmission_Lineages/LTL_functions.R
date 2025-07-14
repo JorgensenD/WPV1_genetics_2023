@@ -293,7 +293,7 @@ subtrefunc <- function(i,subtree, tree){
       tipdate <- max(tipdates, na.rm = T)
       
       tipshapes <-     sapply( strsplit( tipnames, '\\_' ), function(x){  head(x,2)[2]})
-      tipshapes[which(tipshapes %!in% c("AFP", "ES"))] <- NA
+      tipshapes[which(tipshapes %!in% c("AFP", "ES", "Contact"))] <- NA
       ## extract AFP and ES and set all the other tips to NA
       
       length(tipshapes) <- length(droptree$tip.label)+droptree$Nnode
