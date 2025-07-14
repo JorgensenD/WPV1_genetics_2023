@@ -302,9 +302,9 @@ subtrefunc <- function(i,subtree, tree){
         scale_y_reverse()+
         coord_cartesian(xlim=c(xmin-1.5, xmax+.2), clip = 'off')+ #clip off v. important to allow the plots to overlap
         ###ADD YLIMS A BIT WIDER THAN THE TREEE
-        geom_tippoint(aes(subset = !grepl("collapse", label), shape=tipshapes), fill=tstcl[["data"]][[2]][tstcl[["data"]][[2]]$node==nodenum,]$colour, size=2) +
+        geom_tippoint(aes(subset = (label %!in% c("collapse")), shape=tipshapes), fill=tstcl[["data"]][[2]][tstcl[["data"]][[2]]$node==nodenum,]$colour, size=2) +
         scale_shape_manual(values=tipsh)+
-        geom_tiplab(aes(subset = grepl("collapse", label),label = "\u2B9E", color = c(sapply( strsplit( droptree$tip.label, '\\_' ), function(x){ tail(x,1)[1] }), rep("NA", Nnode2(droptree)-Ntip(droptree)))), show.legend = F, offset = -.02, vjust = 0.4) +
+        geom_tiplab(aes(subset = (label %in% c("collapse")),label = "\u2B9E", color = c(sapply( strsplit( droptree$tip.label, '\\_' ), function(x){ tail(x,1)[1] }), rep("NA", Nnode2(droptree)-Ntip(droptree)))), show.legend = F, offset = -.02, vjust = 0.4) +
         scale_color_manual(values = getPalette, drop=FALSE, na.value="white") +
         
         geom_rootedge(colour=tstcl[["data"]][[2]][tstcl[["data"]][[2]]$node==nodenum,]$colour)+
